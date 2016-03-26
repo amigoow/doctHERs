@@ -141,7 +141,7 @@ body {
 		</div>
 		<div class="row">
 		<div style="text-align:center;">
-		<a href="business" class="btn btn-success">Bussiness account? </a>
+		<a href="business" class="btn btn-success">Patient account? </a>
 		<br /><br /><br />
 					<img src="<?php echo base_url(); ?>application/assests/images/download.jpg" width="200"/>
 		<br /><em>Download App to Get Signup</em>

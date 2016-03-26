@@ -6,11 +6,11 @@ class Home extends CI_Controller {
 
     return "http://localhost/amigo/";
   }
-    
+
 public function getNotifyNumbers(){
 
   echo $this->post->getNotifyNum($this->session->userdata['userin']['username']);
-  
+
 }
 
 function reset(){
@@ -40,15 +40,15 @@ foreach ($res->result() as $key) {
 $status = "";
 if($key->posttype == "text"){
   $status = '<div class="status" style="padding-left:20px;"> '.$key->status .' </div>';
-   
+
 }
-else 
+else
   if($key->posttype == "video"){
 
-      $status = '<div class="status" style="padding-left:20px;"> 
+      $status = '<div class="status" style="padding-left:20px;">
 <video style="width:100%;padding-right:20px;" controls>
   <source src="'.$this->get_link().$key->status.'" type="video/mp4">
- 
+
   Your browser does not support HTML5 video.
 </video>
 
@@ -99,7 +99,7 @@ $newstatus = str_replace($smiles, $smileimages, $status);
   <div class="smallsec" id="postid'.$key->postid.'">
       <div class="row ">
         <div class="col-md-1">
-        <img src="'.$this->get_link().$this->getUserImageFromNumber($key->postedby).'"  width="60"/>  
+        <img src="'.$this->get_link().$this->getUserImageFromNumber($key->postedby).'"  width="60"/>
         </div>
         <div class="col-md-4">
        <strong> &nbsp;  &nbsp;  '.$nam .' </strong> <br /> &nbsp;&nbsp;&nbsp;
@@ -112,23 +112,23 @@ $newstatus = str_replace($smiles, $smileimages, $status);
       <br />
       <div class="row">
               '.$newstatus.'
-   
+
       </div>
       <br />
-     <a href="javascript:void(0);" class="thumb thumup" data-type="thumbup" data-id="'.$key->postid.'" > <i class="fa fa-thumbs-up" style="font-size: 22px;"></i> </a>       <a data-id="'.$key->postid.'" href="#modal-container-908562" role="button" class="btn modallikes" data-toggle="modal"> <span id="'.$key->postid.'">'.$likes.'</span>  Likes this</a> 
+     <a href="javascript:void(0);" class="thumb thumup" data-type="thumbup" data-id="'.$key->postid.'" > <i class="fa fa-thumbs-up" style="font-size: 22px;"></i> </a>       <a data-id="'.$key->postid.'" href="#modal-container-908562" role="button" class="btn modallikes" data-toggle="modal"> <span id="'.$key->postid.'">'.$likes.'</span>  Likes this</a>
 
-      
+
 
   <div id="commnets'.$key->postid.'">    '.$rd.' </div>
 
       <div class="row">
 
       <div class="col-md-6">
-          <input type="text" class="form-control" id="cmnt'.$key->postid.'" required /> 
+          <input type="text" class="form-control" id="cmnt'.$key->postid.'" required />
       </div>
       <div class="col-md-2 commentbox">
         <input type="button" data-notify="'.$connum.'" data-id="'.$key->postid.'" class="btn btn-success cmntbtn" value="Comment" />
-       
+
       </div>
       </div>
       </div>';
@@ -138,7 +138,7 @@ $html .= '
 <div class="container">
   <div class="row clearfix">
     <div class="col-md-12 column">
-       
+
       <div class="modal fade" id="modal-container-376346" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog">
           <div class="modal-content">
@@ -155,11 +155,11 @@ $html .= '
                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> <button type="button" class="btn btn-primary">Save changes</button>
             </div>
           </div>
-          
+
         </div>
-        
+
       </div>
-      
+
     </div>
   </div>
 </div>
@@ -168,8 +168,8 @@ $html .= '
 <div class="container">
   <div class="row clearfix">
     <div class="col-md-12 column">
- 
-      
+
+
       <div class="modal fade" id="modal-container-908562" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog">
           <div class="modal-content">
@@ -180,17 +180,17 @@ $html .= '
               </h4>
             </div>
             <div class="modal-body" id="peopleplike">
-              
+
             </div>
             <div class="modal-footer">
                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
             </div>
           </div>
-          
+
         </div>
-        
+
       </div>
-      
+
     </div>
   </div>
 </div>
@@ -219,7 +219,7 @@ $.post("../deletepost",{
 });
 
 
- 
+
 
  $(document).on("click", "a.modaldislikes", function() {
 
@@ -269,7 +269,7 @@ var postid = $(this).attr("data-id");
     $.post("../dolike",{
 
       pid : postid,
-        likby : likeby 
+        likby : likeby
 
     },function(data){
 
@@ -296,7 +296,7 @@ var postid = $(this).attr("data-id");
     $.post("../dodislike",{
 
       pid : postid,
-        likby : likeby 
+        likby : likeby
 
     },function(data){
 
@@ -305,7 +305,7 @@ var postid = $(this).attr("data-id");
 
     $.post("../dislikepost",{
 
-      pid : postid      
+      pid : postid
 
     },function(data){
 
@@ -362,7 +362,7 @@ $("#commnets"+postid).html(data);
     });
 
 
-  
+
 
 
 
@@ -382,7 +382,7 @@ echo $html;
 
 public function singlepost($id){
 
-  
+
   $this->load->view('view_profile_header');
 
 $rec = $this->main_random_functions->getUsertypeBsns($this->session->userdata['userin']['username']);
@@ -411,7 +411,7 @@ $nam = $rec2['0']->contactname;
 
 echo "<li> <a href='singlepost/".$key->contextid."'><div class='row'>
 <div class='col-md-2'>
-<img src='".$this->get_link().$this->getUserImageFromNumber($key->notifyby)."' width='40'/> 
+<img src='".$this->get_link().$this->getUserImageFromNumber($key->notifyby)."' width='40'/>
 </div>
 <div class='col-md-8' style='color:#111;'>
 
@@ -423,7 +423,7 @@ echo "<li> <a href='singlepost/".$key->contextid."'><div class='row'>
 
 
  }
- 
+
 
 }
 
@@ -437,12 +437,12 @@ public function clearnotify(){
  $ID =  $this->uri->segment(4);
 
 $dtnid = array('dataid' => $ID,
-'datanumber' => $datanum 
+'datanumber' => $datanum
  );
 
 
 $this->load->view('view_main_camera',$dtnid);
-}  
+}
 
 function update_report(){
 $r = $this->input->post("dname");
@@ -465,20 +465,20 @@ function adsanalytics($link,$id){
      );
 $this->main_random_functions->updateanalytics($data);
 redirect(base64_decode($link),"refresh");
-  
+
 }
 
 function showads(){
 
     $this->load->view("view_main_header");
-  
+
 
   $this->load->view('view_main_showads');
 }
 
 function reports(){
     $this->load->view("view_main_header");
-  
+
 
   $this->load->view('view_main_reports');
 }
@@ -559,7 +559,7 @@ $this->main_random_functions->update_profile($name,$user,$chk);
 public function settings(){
 
   $this->load->view("view_main_header");
-  
+
   $this->load->view("view_main_settings");
 
 }
@@ -576,15 +576,15 @@ foreach ($res as $key) {
 $status = "";
 if($key->posttype == "text"){
   $status = '<div class="status" style="padding-left:20px;"> '.$key->status .' </div>';
-   
+
 }
-else 
+else
   if($key->posttype == "video"){
 
-      $status = '<div class="status" style="padding-left:20px;"> 
+      $status = '<div class="status" style="padding-left:20px;">
 <video style="width:100%;padding-right:20px;" controls>
   <source src="'.$this->get_link().$key->status.'" type="video/mp4">
- 
+
   Your browser does not support HTML5 video.
 </video>
 
@@ -633,7 +633,7 @@ $newstatus = str_replace($smiles, $smileimages, $status);
   <div class="smallsec" id="postid'.$key->postid.'">
       <div class="row ">
         <div class="col-md-1">
-        <img src="'.$this->get_link().$this->getUserImageFromNumber($key->postedby).'"  width="60"/>  
+        <img src="'.$this->get_link().$this->getUserImageFromNumber($key->postedby).'"  width="60"/>
         </div>
         <div class="col-md-3">
        <strong> &nbsp;  &nbsp;  '.$nam .' </strong> <br /> &nbsp;&nbsp;&nbsp;
@@ -646,10 +646,10 @@ $newstatus = str_replace($smiles, $smileimages, $status);
       <br />
       <div class="row">
               '.$newstatus.'
-   
+
       </div>
       <br />
-         <a href="javascript:void(0);" class="thumb thumup" data-type="thumbup" data-id="'.$key->postid.'" > <i class="fa fa-thumbs-up" style="font-size: 22px;"></i> </a>       <a data-id="'.$key->postid.'" href="#modal-container-908562" role="button" class="btn modallikes" data-toggle="modal"> <span id="'.$key->postid.'">'.$likes.'</span>  Likes this</a> 
+         <a href="javascript:void(0);" class="thumb thumup" data-type="thumbup" data-id="'.$key->postid.'" > <i class="fa fa-thumbs-up" style="font-size: 22px;"></i> </a>       <a data-id="'.$key->postid.'" href="#modal-container-908562" role="button" class="btn modallikes" data-toggle="modal"> <span id="'.$key->postid.'">'.$likes.'</span>  Likes this</a>
 
 
 
@@ -762,7 +762,7 @@ $this->main_random_functions->update_cover_image("uploadedimages/".$filename,$th
   $data = explode(',', $this->input->post("imagedata"));
 
 $filename_path = md5(time().uniqid()).".jpg";
- $decoded=base64_decode($data[1]); 
+ $decoded=base64_decode($data[1]);
 
 
 file_put_contents("../amigo/uploadedimages/".$filename_path,$decoded);
@@ -886,7 +886,7 @@ public function businessdash(){
   $this->load->view('view_main_header',$data);
 
 $this->load->view("view_main_feeds_busns",$data);
-  
+
 }
 
 public function getBusnsName(){
@@ -947,28 +947,27 @@ $data = array(
     'smtp_host' => 'ssl://smtp.googlemail.com',
     'smtp_port' => 465,
     'smtp_user' => 'thephotontechnologies@gmail.com',
-    'smtp_pass' => 'Engrdani1992!!@',
-    'mailtype'  => 'html', 
+    'smtp_pass' => 'Engrdani1992!!@2016',
+    'mailtype'  => 'html',
     'charset'   => 'iso-8859-1'
 );
 $this->load->library('email', $config);
 $this->email->set_newline("\r\n");
 
-$this->email->from('thephotontechnologies@gmail.com', 'BeMy Amigo');
-$this->email->to($this->input->post("email")); 
-$this->email->subject('Business Account Verification');
+$this->email->from('thephotontechnologies@gmail.com', 'doctHERs');
+$this->email->to($this->input->post("email"));
+$this->email->subject('Patient Account Verification');
 $this->email->message('
 <div style="  min-height: 300px;
   background: #111;
   text-align: center;
   padding-top: 25px;
   ">
-<h1 style="color:#fff;">BeMy Amigo</h1>
-<h5 style="color:#ccc;"><em>World First Contact List Based Social Network</em></h5>
+<h1 style="color:#fff;">doctHers</h1>
 <div style="background:#009688;  padding: 20px;">
   <h2 style="color:#fff !important">
-  Thank you for signing up with Be My Amigo Business Account</h2>
- <h4 style="  color: #ddd;  color: #fff;"> Please click here to verify your email account  
+  Thank you for signing up with doctHERs patient Account</h2>
+ <h4 style="  color: #ddd;  color: #fff;"> Please click here to verify your email account
 
  <a style="  background: #333;
   padding: 13px;
@@ -979,7 +978,7 @@ $this->email->message('
   " href="http://localhost/CodeIg/home/verify/'.$key.'">Click here</a></h4>
 </div>
 </div>
-  ');  
+  ');
 
 $result = $this->email->send();
 $msg = array('success' => "<div class='alert alert-success'>Thank you for signing up -  We have sent you an email please take a look.</div>" );
@@ -1004,7 +1003,7 @@ Your browser does not support the audio element.
 
 }
 
-$html .= 
+$html .=
 '<script>
 
   $(document).ready(function(){
@@ -1149,14 +1148,14 @@ echo $html;
 }
 
 function base64_to_jpeg($base64_string, $output_file) {
-    $ifp = fopen($output_file, "wb"); 
+    $ifp = fopen($output_file, "wb");
 
     $data = explode(',', $base64_string);
 
-    fwrite($ifp, base64_decode($data[1])); 
-    fclose($ifp); 
+    fwrite($ifp, base64_decode($data[1]));
+    fclose($ifp);
 
-    return $output_file; 
+    return $output_file;
 }
 function UserProfiles($number){
 
@@ -1323,13 +1322,13 @@ function getbsnspostscount(){
 
   echo $this->post->getpstcnt($this->session->userdata['userbsns']['email']);
 
-} 
+}
 
 function getpostscount(){
 
   echo $this->post->getpstcnt($this->session->userdata['userin']['username']);
 
-} 
+}
 
 
 function bsnsnewsgenration(){
@@ -1366,7 +1365,7 @@ $nam = $rec2['0']->contactname;
 
 if($key->posttype == "text"){
   $status = '<div class="status" style="padding-left:20px;"><strong><em>'.$nam.'</em></strong> Posted <strong>'.$key->status .'</strong> </div>';
-   
+
 }
 else
 if($key->posttype == "video"){
@@ -1406,7 +1405,7 @@ $html .= '
 ';
 
 
-  
+
 }
 
 $html .= '</ul>
@@ -1449,15 +1448,15 @@ foreach ($res as $key) {
 $status = "";
 if($key->posttype == "text"){
   $status = '<div class="status" style="padding-left:20px;"> '.$key->status .' </div>';
-   
+
 }
-else 
+else
   if($key->posttype == "video"){
 
-      $status = '<div class="status" style="padding-left:20px;"> 
+      $status = '<div class="status" style="padding-left:20px;">
 <video style="width:100%;padding-right:20px;" controls>
   <source src="'.$this->get_link().$key->status.'" type="video/mp4">
- 
+
   Your browser does not support HTML5 video.
 </video>
 
@@ -1508,7 +1507,7 @@ $newstatus = str_replace($smiles, $smileimages, $status);
   <div class="smallsec  wow fadeIn" id="postid'.$key->postid.'">
       <div class="row ">
         <div class="col-md-1">
-        <img src="'.$this->get_link().$this->getUserImageFromNumber($key->postedby).'"  width="60"/>  
+        <img src="'.$this->get_link().$this->getUserImageFromNumber($key->postedby).'"  width="60"/>
         </div>
         <div class="col-md-4">
        <strong> &nbsp;  &nbsp;  '.$nam .' </strong> <br /> &nbsp;&nbsp;&nbsp;
@@ -1521,23 +1520,23 @@ $newstatus = str_replace($smiles, $smileimages, $status);
       <br />
       <div class="row">
               '.$newstatus.'
-   
+
       </div>
       <br />
-     <a href="javascript:void(0);" class="thumb thumup" data-type="thumbup" data-id="'.$key->postid.'" > <i class="fa fa-thumbs-up" style="font-size: 22px;"></i> </a>       <a data-id="'.$key->postid.'" href="#modal-container-908562" role="button" class="btn modallikes" data-toggle="modal"> <span id="'.$key->postid.'">'.$likes.'</span>  Likes this</a> 
+     <a href="javascript:void(0);" class="thumb thumup" data-type="thumbup" data-id="'.$key->postid.'" > <i class="fa fa-thumbs-up" style="font-size: 22px;"></i> </a>       <a data-id="'.$key->postid.'" href="#modal-container-908562" role="button" class="btn modallikes" data-toggle="modal"> <span id="'.$key->postid.'">'.$likes.'</span>  Likes this</a>
 
-      
+
 
   <div id="commnets'.$key->postid.'">    '.$rd.' </div>
 
       <div class="row">
 
       <div class="col-md-6">
-          <input type="text" class="form-control" id="cmnt'.$key->postid.'" required /> 
+          <input type="text" class="form-control" id="cmnt'.$key->postid.'" required />
       </div>
       <div class="col-md-2 commentbox">
         <input type="button" data-notify="'.$connum.'" data-id="'.$key->postid.'" class="btn btn-success cmntbtn" value="Comment" />
-       
+
       </div>
       </div>
       </div>';
@@ -1547,7 +1546,7 @@ $html .= '
 <div class="container">
   <div class="row clearfix">
     <div class="col-md-12 column">
-       
+
       <div class="modal fade" id="modal-container-376346" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog">
           <div class="modal-content">
@@ -1564,11 +1563,11 @@ $html .= '
                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> <button type="button" class="btn btn-primary">Save changes</button>
             </div>
           </div>
-          
+
         </div>
-        
+
       </div>
-      
+
     </div>
   </div>
 </div>
@@ -1577,8 +1576,8 @@ $html .= '
 <div class="container">
   <div class="row clearfix">
     <div class="col-md-12 column">
- 
-      
+
+
       <div class="modal fade" id="modal-container-908562" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog">
           <div class="modal-content">
@@ -1589,17 +1588,17 @@ $html .= '
               </h4>
             </div>
             <div class="modal-body" id="peopleplike">
-              
+
             </div>
             <div class="modal-footer">
                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
             </div>
           </div>
-          
+
         </div>
-        
+
       </div>
-      
+
     </div>
   </div>
 </div>
@@ -1647,7 +1646,7 @@ $.post("deletepost",{
 });
 
 
- 
+
 
  $(document).on("click", "a.modaldislikes", function() {
 
@@ -1697,7 +1696,7 @@ var postid = $(this).attr("data-id");
     $.post("dolike",{
 
       pid : postid,
-        likby : likeby 
+        likby : likeby
 
     },function(data){
 
@@ -1724,7 +1723,7 @@ var postid = $(this).attr("data-id");
     $.post("dodislike",{
 
       pid : postid,
-        likby : likeby 
+        likby : likeby
 
     },function(data){
 
@@ -1733,7 +1732,7 @@ var postid = $(this).attr("data-id");
 
     $.post("dislikepost",{
 
-      pid : postid      
+      pid : postid
 
     },function(data){
 
@@ -1762,7 +1761,7 @@ var comment1 = $("#cmnt"+postid).val();
   if(comment1 == ""){
 
 $("#cmnt"+postid).notify(
-  "Amgio, Say something", 
+  "Amgio, Say something",
   { position:"bottom center",
      style: "bootstrap",
   // default class (string or [string])
@@ -1811,7 +1810,7 @@ $("#commnets"+postid).html(data);
 }
 
 
-  
+
 
 
 
@@ -1888,7 +1887,7 @@ $data = array(
    'notifytype' => $this->input->post("notifytype") ,
     'notifyby' => $this->input->post("notifyby") ,
      'notifyto' => $this->input->post("notifyto") ,
-      'seen' => $this->input->post("seen")  
+      'seen' => $this->input->post("seen")
    );
   $this->post->putnotify($data);
 
@@ -1989,15 +1988,15 @@ foreach ($res->result() as $key) {
 $status = "";
 if($key->posttype == "text"){
   $status = '<div class="status" style="padding-left:20px;"> '.$key->status .' </div>';
-   
+
 }
-else 
+else
   if($key->posttype == "video"){
 
-      $status = '<div class="status" style="padding-left:20px;"> 
+      $status = '<div class="status" style="padding-left:20px;">
 <video style="width:100%;padding-right:20px;" controls>
   <source src="'.$this->get_link().$key->status.'" type="video/mp4">
- 
+
   Your browser does not support HTML5 video.
 </video>
 
@@ -2038,7 +2037,7 @@ $rd = $this->getCommnets($key->postid);
   <div class="smallsec" id="postid'.$key->postid.'">
       <div class="row ">
         <div class="col-md-1">
-        <img src="'.$this->get_link().$this->getUserImageFromNumber($key->postedby).'" width="60"/>  
+        <img src="'.$this->get_link().$this->getUserImageFromNumber($key->postedby).'" width="60"/>
         </div>
         <div class="col-md-3">
        <strong> &nbsp;  &nbsp;  Me </strong> <br /> &nbsp;&nbsp;&nbsp;
@@ -2051,19 +2050,19 @@ $rd = $this->getCommnets($key->postid);
       <br />
       <div class="row">
               '.$status1.'
-   
+
       </div>
       <br />
-     <a href="javascript:void(0);" class="thumb thumup" data-type="thumbup" data-id="'.$key->postid.'" > <i class="fa fa-thumbs-up" style="font-size: 22px;"></i> </a>       <a data-id="'.$key->postid.'" href="#modal-container-908562" role="button" class="btn modallikes" data-toggle="modal"> <span id="'.$key->postid.'">'.$likes.'</span>  Likes this</a> 
+     <a href="javascript:void(0);" class="thumb thumup" data-type="thumbup" data-id="'.$key->postid.'" > <i class="fa fa-thumbs-up" style="font-size: 22px;"></i> </a>       <a data-id="'.$key->postid.'" href="#modal-container-908562" role="button" class="btn modallikes" data-toggle="modal"> <span id="'.$key->postid.'">'.$likes.'</span>  Likes this</a>
 
-      
+
 
   <div id="commnets'.$key->postid.'">    '.$rd.' </div>
 
       <div class="row">
 
       <div class="col-md-6">
-          <input type="text" class="form-control" id="cmnt'.$key->postid.'" required /> 
+          <input type="text" class="form-control" id="cmnt'.$key->postid.'" required />
       </div>
       <div class="col-md-2 commentbox">
         <input type="button"  data-id="'.$key->postid.'" class="btn btn-success cmntbtn" value="Comment" />
@@ -2075,8 +2074,8 @@ $html .= '
 <div class="container">
   <div class="row clearfix">
     <div class="col-md-12 column">
- 
-      
+
+
       <div class="modal fade" id="modal-container-908562" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog">
           <div class="modal-content">
@@ -2087,17 +2086,17 @@ $html .= '
               </h4>
             </div>
             <div class="modal-body" id="peopleplike">
-              
+
             </div>
             <div class="modal-footer">
                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
             </div>
           </div>
-          
+
         </div>
-        
+
       </div>
-      
+
     </div>
   </div>
 </div>
@@ -2156,7 +2155,7 @@ var postid = $(this).attr("data-id");
     $.post("dolike",{
 
       pid : postid,
-        likby : likeby 
+        likby : likeby
 
     },function(data){
 
@@ -2183,7 +2182,7 @@ var postid = $(this).attr("data-id");
     $.post("dodislike",{
 
       pid : postid,
-        likby : likeby 
+        likby : likeby
 
     },function(data){
 
@@ -2192,7 +2191,7 @@ var postid = $(this).attr("data-id");
 
     $.post("dislikepost",{
 
-      pid : postid      
+      pid : postid
 
     },function(data){
 
@@ -2264,7 +2263,7 @@ $nam = $rec2['0']->contactname;
 
 }
  echo "<h5 style='border-top:1px solid #ccc;  padding-top: 12px;  font-weight: bold;'>".$nam."</h5>";
-  
+
 }
 
 
@@ -2304,7 +2303,7 @@ $nam = $name2['0']->Name;
 
 }
  echo "<h5 style='border-top:1px solid #ccc;  padding-top: 12px;  font-weight: bold;'>".$nam."</h5>";
-  
+
 }
 
 
@@ -2335,14 +2334,14 @@ echo  $this->post->likenow($this->input->post("pid"),$this->input->post('likby')
 function dislikepost(){
 
 
-echo  $this->post->getdislikes($this->input->post("pid"));  
+echo  $this->post->getdislikes($this->input->post("pid"));
 
 }
 
 function dislikepostOnId($id){
 
 
-return  $this->post->getdislikes($this->input->post($id));  
+return  $this->post->getdislikes($this->input->post($id));
 
 }
 
@@ -2350,7 +2349,7 @@ return  $this->post->getdislikes($this->input->post($id));
 function likepost(){
 
 
-echo  $this->post->getlikes($this->input->post("pid"));  
+echo  $this->post->getlikes($this->input->post("pid"));
 
 }
 
@@ -2479,7 +2478,7 @@ public function login(){
 
 $this->load->view('view_main_login');
 
-} 
+}
 
 
 public function logout(){
@@ -2518,7 +2517,7 @@ $this->load->view("view_main_login",$err_msg);
     session_start();
     error_reporting(0);
      $this->load->helper('url');
-      $this->load->helper('form'); 
+      $this->load->helper('form');
     $this->load->library('session');
      $this->load->library('form_validation');
      $this->load->model('MainLoginUser');
@@ -2528,6 +2527,6 @@ $this->load->view("view_main_login",$err_msg);
    $this->load->model('post');
    $this->load->model('business');
  }
-    
-    
+
+
 }
